@@ -1,4 +1,5 @@
 # PlatformaMultimedialna
+
 Działanie aplikacji
 
 1 Uruchomienie
@@ -14,10 +15,12 @@ Update-Database
 „NazwaMigracji” – może być dowolna.
 
 2 Twoje media
+
 Aby przejść na stronę „Twoje media” użytkownik musi być zalogowany.
 Jeżeli nie jesteś zalogowany to strona automatycznie przekieruje cię na stronę logowania.
 
 3 W „Twoje media”
+
 Po udanym zalogowaniu się, użytkownik może przejść na stronę „Twoje media”, gdzie może wrzucić swoje pliki z rozszerzeniem „.jpg”, „.png”, „.jpeg”, „.mp3” oraz „.mp4”. Jeżeli wrzucisz plik na stronę to automatycznie dane pliku dodają się do bazy danych „dbo.Media” i z tej bazy dane są pobierane i serializowane do pliku tekstowego dane_z_bazy.txt  w „wwwroot”.
 
 
