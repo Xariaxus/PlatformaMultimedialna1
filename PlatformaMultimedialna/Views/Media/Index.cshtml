@@ -1,0 +1,97 @@
+﻿@model IEnumerable<PlatformaMultimedialna.Models.MediaModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Przesyłanie pliku</h1>
+
+
+@using (Html.BeginForm("PrzeslijPlik", "Media", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        <label>Wybierz plik:</label>
+        <input type="file" name="plik" />
+    </div>
+    <div>
+        <input type="submit" value="Prześlij" />
+    </div>
+}
+
+<div>
+    @ViewBag.Message
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h3>Obraz</h3>
+                <ul>
+                    @if (Model != null)
+                    {
+                        foreach (var plik in Model)
+                        {
+
+                        }
+                    }
+                </ul>
+            </th>
+            <th>
+                <h3>Nazwa</h3>
+            </th>
+            <th>
+                <h3>Pobierz/Usuń</h3>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var plik in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@Url.Action("PobierzPlik", "Media", new { nazwaPliku = plik.NazwaPliku })" alt="Obraz" />
+                    </td>
+                    <td>
+                        <h4>@plik.NazwaPliku</h4>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0);" onclick="pobierzPlik('@plik.NazwaPliku')" class="btn btn-success">Pobierz</a>
+                        <button onclick="usunPlik('@plik.NazwaPliku')" class="btn btn-danger">Usuń</button>
+                    </td>
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+<script>
+    function usunPlik(nazwaPliku) {
+        if (confirm("Czy na pewno chcesz usunąć ten plik?")) {
+            // Wyślij żądanie POST do akcji UsunPlik kontrolera Media
+            $.post('@Url.Action("UsunPlik", "Media")', { nazwaPliku: nazwaPliku })
+                .done(function () {
+                    alert("Plik usunięty poprawnie!");
+                    window.location.reload(); // Przeładuj stronę po usunięciu pliku
+                })
+                .fail(function () {
+                    alert("Wystąpił błąd podczas usuwania pliku.");
+                });
+        }
+    }
+
+    function pobierzPlik(nazwaPliku) {
+        // Utwórz adres URL do akcji PobierzPlik kontrolera Media
+        var url = '@Url.Action("PobierzPlik", "Media")?nazwaPliku=' + encodeURIComponent(nazwaPliku);
+        window.location.href = url;
+
+        setTimeout(function () {
+            location.reload();
+        }, 2000); // odśwież stronę po 2 sekundach (zmień wartość 2000 na dowolną inną, jeśli chcesz zmienić czas odświeżania)
+    }
+</script>
