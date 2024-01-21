@@ -1,6 +1,8 @@
 # PlatformaMultimedialna
 Działanie aplikacji
+
 1 Uruchomienie
+
 Gdy uruchomisz aplikację to ukaże ci się strona główna. Na górnym pasku znajduje się od lewej strony „Strona główna”, „Polityka prywatności”, 
 „Twoje media”, „Rejestracja”, „Logowanie”.
 
